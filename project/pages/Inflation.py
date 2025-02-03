@@ -125,4 +125,4 @@ def create_price_metrics(supermarket):
     )
 
 if __name__ == "__main__":
-    main()
+    main() 
