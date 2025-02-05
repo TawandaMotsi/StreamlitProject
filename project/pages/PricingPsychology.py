@@ -26,7 +26,7 @@ def main():
     supermarkets = sorted(collection.distinct("supermarket"))
 
     st.header('Pricing Psychology')
-    st.write('Analyze potential psychological pricing strategies across supermarkets')
+    st.write('Analyse potential psychological pricing strategies across supermarkets')
     
     # User inputs
     selected_date = st.selectbox('Select the date', dates)
@@ -61,7 +61,7 @@ def price_psychology_histogram(date, categories, supermarkets):
             
             # Create price ranges
             bins = list(range(0, 100, 10))
-            labels = [f"{i}-{i+9}" for i in bins]
+            labels = [f"{i}-{i+9}" for i in bins[:-1]]  # Adjust labels to be one less than the number of bins
             df['range'] = pd.cut(df['price_ending'], bins=bins, right=False, labels=labels)
             
             hist_data = df['range'].value_counts().sort_index()
