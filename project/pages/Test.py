@@ -58,8 +58,14 @@ def price_psychology_histogram(date, categories, supermarkets):
             df['price_ending'] = df['prices_(€)'].astype(str).str.split('.').str[-1]
             df['price_ending'] = df['price_ending'].str.ljust(2, '0').str[:2]
             df['price_ending'] = pd.to_numeric(df['price_ending'], errors='coerce')
-            
+
+            # Ensure no NaN values after conversion
+            df = df.dropna(subset=['price_ending'])
             # Create price ranges
+
+            bins = list(range(0, 110, 10))  # Add 110 to ensure the last value falls in a range
+            labels = [f"{i}-{i+9}" for i in bins[:-1]]
+
             bins = list(range(0, 100, 10))
             labels = [f"{i}-{i+9}" for i in bins[:-1]]  # Adjust labels to be one less than the number of bins
             df['range'] = pd.cut(df['price_ending'], bins=bins, right=False, labels=labels)
