@@ -74,7 +74,7 @@ def scrape_aldi_data(browser, directory):
         last_page_number = []
         error_list = []
         try:
-            driver.get(f'https://groceries.aldi.co.uk/en-GB/{category}')
+            driver.get(f'https://groceries.aldi.ie/en-GB/{category}')
             time.sleep(3)
             last_page_numbers = driver.find_elements(By.CSS_SELECTOR, f'ul .d-flex-inline.pt-2')
             last_page_number.extend([number.text for number in last_page_numbers])
@@ -88,7 +88,7 @@ def scrape_aldi_data(browser, directory):
             # If the initial attempt fails, reload the page and try again
             driver.quit()
             time.sleep(10)
-            driver.get(f'https://groceries.aldi.co.uk/en-GB/{category}')
+            driver.get(f'https://groceries.aldi.ie/en-GB/{category}')
             last_page_numbers = driver.find_elements(By.CSS_SELECTOR, f'ul .d-flex-inline.pt-2')
             last_page_number.extend([number.text for number in last_page_numbers])
             last_page_number = last_page_number[1]
@@ -101,7 +101,7 @@ def scrape_aldi_data(browser, directory):
                 # Set the timeout for the page request
                 signal.alarm(30)  # Set the timeout to 30 seconds
 
-                driver.get(f'https://groceries.aldi.co.uk/en-GB/{category}?&page={page}')
+                driver.get(f'https://groceries.aldi.ie/en-GB/{category}?&page={page}')
                 time.sleep(3)
 
                 names = driver.find_elements(By.CSS_SELECTOR, product_name_CSS)
