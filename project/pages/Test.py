@@ -1,105 +1,53 @@
-import pandas as pd
 import streamlit as st
-import plotly.graph_objects as go
-import plotly.subplots as sp
-from pymongo import MongoClient
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+import seaborn as sns
 
-# MongoDB connection setup
-client = MongoClient("mongodb://localhost:27017/")
-db = client["ProjectStreamlit"]
-collection = db["p"]
+def load_data():
+    # Load dataset (Ensure CSV has 'Product Name', 'Price', 'Supermarket')
+    return pd.read_csv('price_data.csv')
 
-# Set page configuration
-st.set_page_config(
-    page_title="Pricing Psychology",
-    page_icon="🧠",
-    layout="wide"
-)
+def preprocess_price(price):
+    # Extract the decimal part (pence value)
+    return round(price % 1, 2) * 100
+
+def match_product(product_name, data):
+    vectorizer = TfidfVectorizer()
+    tfidf_matrix = vectorizer.fit_transform(data['Product Name'])
+    query_vector = vectorizer.transform([product_name])
+    similarities = cosine_similarity(query_vector, tfidf_matrix).flatten()
+    data['Similarity'] = similarities
+    return data.sort_values(by='Similarity', ascending=False).head(5)
+
+def price_psychology_analysis(data):
+    data['Pence Value'] = data['Price'].apply(preprocess_price)
+    plt.figure(figsize=(10, 5))
+    sns.histplot(data['Pence Value'], bins=20, kde=True)
+    plt.xlabel('Pence Value (XX in £YY.XX)')
+    plt.ylabel('Frequency')
+    plt.title('Price Psychology Analysis')
+    st.pyplot(plt)
 
 def main():
-    """
-    Modified version that uses MongoDB instead of local files
-    """
-    # Fetch available dates and categories from MongoDB
-    dates = sorted(collection.distinct("date"), reverse=True)
-    categories = sorted(collection.distinct("category"))
-    supermarkets = sorted(collection.distinct("supermarket"))
-
-    st.header('Pricing Psychology')
-    st.write('Analyze potential psychological pricing strategies across supermarkets')
+    st.title("Supermarket Price Comparison & Analysis")
+    data = load_data()
     
-    # User inputs
-    selected_date = st.selectbox('Select the date', dates)
-    selected_categories = st.multiselect('Select Categories', categories, default=categories)
+    tab1, tab2 = st.tabs(["Price Comparison", "Price Psychology Analysis"])
     
-    fig = price_psychology_histogram(selected_date, selected_categories, supermarkets)
-    st.plotly_chart(fig, use_container_width=True)
-
-def price_psychology_histogram(date, categories, supermarkets):
-    """
-    Create histograms from MongoDB data
-    """
-    colours = ['blue', 'orange', 'green', 'red', 'purple']
-    histograms = []
-
-    for supermarket, colour in zip(supermarkets, colours):
-        # Query MongoDB for data
-        query = {
-            "date": date,
-            "supermarket": supermarket,
-            "category": {"$in": categories}
-        }
-        projection = {"_id": 0, "prices_(€)": 1, "category": 1}
-        
-        df = pd.DataFrame(list(collection.find(query, projection)))
-        
-        if not df.empty:
-            # Process prices
-            df['price_ending'] = df['prices_(€)'].astype(str).str.split('.').str[-1]
-            df['price_ending'] = df['price_ending'].str.ljust(2, '0').str[:2]
-            df['price_ending'] = pd.to_numeric(df['price_ending'], errors='coerce')
-
-            # Ensure no NaN values after conversion
-            df = df.dropna(subset=['price_ending'])
-            # Create price ranges
-
-            bins = list(range(0, 110, 10))  # Add 110 to ensure the last value falls in a range
-            labels = [f"{i}-{i+9}" for i in bins[:-1]]
-
-            bins = list(range(0, 100, 10))
-            labels = [f"{i}-{i+9}" for i in bins[:-1]]  # Adjust labels to be one less than the number of bins
-            df['range'] = pd.cut(df['price_ending'], bins=bins, right=False, labels=labels)
-            
-            hist_data = df['range'].value_counts().sort_index()
-            histograms.append((supermarket, colour, hist_data))
-
-    # Create subplots
-    fig = sp.make_subplots(
-        rows=len(histograms), 
-        cols=1,
-        subplot_titles=[f'{supermarket} - {date}' for supermarket, _, _ in histograms]
-    )
-
-    for idx, (supermarket, colour, hist_data) in enumerate(histograms):
-        fig.add_trace(
-            go.Bar(
-                x=hist_data.index,
-                y=hist_data.values,
-                marker_color=colour,
-                name=supermarket
-            ),
-            row=idx+1,
-            col=1
-        )
-
-    fig.update_layout(
-        height=300*len(histograms),
-        title_text=f"Price Ending Distribution - {date}",
-        showlegend=False,
-        margin=dict(t=100, b=100)
-    )
+    with tab1:
+        st.subheader("Find Similar Products Across Supermarkets")
+        product_name = st.text_input("Enter Product Name:")
+        if st.button("Compare Prices"):
+            results = match_product(product_name, data)
+            st.write(results[['Supermarket', 'Product Name', 'Price']])
     
-    return fig
+    with tab2:
+        st.subheader("Psychological Pricing Patterns")
+        if st.button("Analyze Price Endings"):
+            price_psychology_analysis(data)
 
 if __name__ == "__main__":
     main()
