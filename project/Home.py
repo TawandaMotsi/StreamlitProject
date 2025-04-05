@@ -18,7 +18,6 @@ Navigate the Site:
 * About Me: Discover why this site was created.
 * Requirements: Understand what the projects technical and business requirements are.
 * Process Explanation: Dive into the methodology for collecting and presenting pricing data.
-* Data Quality: Learn about the commitment to accuracy, reliability and timeliness in the data provided.
 * Daily Product Analysis: Deep dive into daily pricing analysis for branded and own-brand products.
 * Pricing Psychology: Gain insights into how different supermarkets use pricing behavior to influence consumers.
 * Time Series Forecasting: Use historical data to predict future price movements or view the cheapest day to shop!
