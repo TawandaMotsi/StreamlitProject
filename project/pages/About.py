@@ -17,4 +17,4 @@ st.write(
     """,
     unsafe_allow_html=True
 )
-st.image("images/tawa.png", caption="Somewhere on the Globe")
+st.image("images/tawa.jpeg", caption="Somewhere on the Globe")
