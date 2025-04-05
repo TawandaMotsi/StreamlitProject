@@ -1,5 +1,5 @@
 import streamlit as st
-
+st.set_page_config(layout="wide")
 def main():
     # Overview Section
     st.title("The Process")
