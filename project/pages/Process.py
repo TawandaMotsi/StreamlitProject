@@ -118,6 +118,33 @@ def calculate_similarity(keyword, product_names):
                     st.error("The data does not contain the required columns.")
         except Exception as e:
             st.error(f"Error querying MongoDB: {e}""")
+        
+        
+        st.header("Price Comparison")
+
+        with st.expander("Code: Price Comparison"):
+            st.code("""
+    def calculate_similarity(keyword, product_names):
+        \"\"\"Calculate cosine similarity between the keyword and product names\"\"\"
+        try:
+            processed_keyword = preprocess_text(keyword)
+            processed_names = [preprocess_text(name) for name in product_names]
+
+            vectorizer = TfidfVectorizer()
+            tfidf_matrix = vectorizer.fit_transform(processed_names)
+            keyword_vector = vectorizer.transform([processed_keyword])
+
+            similarity_scores = cosine_similarity(keyword_vector, tfidf_matrix).flatten()
+            similarity_scores = similarity_scores * 100
+
+            return similarity_scores
+        except Exception as e:
+            st.error(f"Error calculating similarity: {e}")
+            return np.zeros(len(product_names))
+        """)
+
+                
+                
 
 if __name__ == "__main__":
     main()
