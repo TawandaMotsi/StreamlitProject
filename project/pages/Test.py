@@ -9,12 +9,15 @@ def main():
 
     st.write("The main Python libraries used are Pandas, Selenium and Beautiful Soup")
 
-    st.markdown("""The information web-scraped is the:
-    1. Product Box
-    2. Product Name
-    3. Product Price
+    st.markdown("""
+    The information web-scraped is:
+
+    1. Product Box  
+    2. Product Name  
+    3. Product Price  
     4. Product Price per Unit
     """)
+
     
    
     # Create a dropdown (selectbox)
