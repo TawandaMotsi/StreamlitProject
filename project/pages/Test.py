@@ -2,8 +2,21 @@ import streamlit as st
 
 def main():
     st.title("The Process")
-    
     st.write("This page will explain, in detail, the end to end process for the webscraping, data processing and data analysis of the supermarket data.")
+
+    st.header("Website Data")
+    st.write("""The product data is webscraped directly from the supermarkets websites for Aldi, ASDA, Morrisons, Sainsbury's and Tesco.
+
+                The main Python libraries used are Pandas, Selenium and Urllib.3.
+
+                The information web-scraped is the:
+
+                    Product Box
+                    Product Name
+                    Product Price
+                    Product Price per Unit
+                """)
+    
 
     # Create a dropdown (selectbox)
     option = st.selectbox(
