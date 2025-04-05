@@ -10,10 +10,10 @@ def main():
     st.write("The main Python libraries used are Pandas, Selenium and Beautiful Soup")
 
     st.write("""The information web-scraped is the:
-    1. Product Box
-    2. Product Name
-    3. Product Price
-    4. Product Price per Unit
+    1. **Product Box**
+    2. **Product Name**
+    3. **Product Price**
+    4. **Product Price per Unit**
     """)
     
     articles = {
@@ -23,6 +23,7 @@ def main():
     }
     
     selected_article = st.selectbox("Select an article to read:", list(articles.keys()))
+    
     # Create a dropdown (selectbox)
     option = st.selectbox(
         "Select an option", 
