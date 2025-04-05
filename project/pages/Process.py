@@ -123,9 +123,9 @@ def calculate_similarity(keyword, product_names):
     st.header("Price Comparison")
 
 # This must be outside any other expander
-with st.expander("Code: Price Comparison"):
+with st.expander("Code:  tfidf_matrix"):
     st.code("""
-def calculate_similarity(keyword, product_names):
+    def calculate_similarity(keyword, product_names):
     \"\"\"Calculate cosine similarity between the keyword and product names\"\"\"
     try:
         processed_keyword = preprocess_text(keyword)
@@ -142,7 +142,7 @@ def calculate_similarity(keyword, product_names):
     except Exception as e:
         st.error(f"Error calculating similarity: {e}")
         return np.zeros(len(product_names))
-    """, language="python")
+    """)
 
 
                 
