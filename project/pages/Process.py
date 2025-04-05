@@ -120,7 +120,7 @@ def calculate_similarity(keyword, product_names):
             st.error(f"Error querying MongoDB: {e}""")
         
         
-    st.header("Price Comparison")
+    st.header("Tfidf_matrix")
 
 # This must be outside any other expander
 with st.expander("Code:  tfidf_matrix"):
