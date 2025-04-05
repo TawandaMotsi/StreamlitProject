@@ -16,7 +16,7 @@ st.write(
     🧳 After spending 8 months traveling through Central and South America, I’m eager to give back by contributing to organizations that have a meaningful **social impact**.
 
     If you'd like to connect or have any questions, feel free to reach out via LinkedIn:  
-    🔗 [linkedin.com/in/tawanda-motsi-24593b84](https://www.linkedin.com/in/tawanda-motsi-24593b84)
+    🔗 [link]((https://www.linkedin.com/in/tawanda-motsi-24593b84))
     """,
     unsafe_allow_html=True
 )
