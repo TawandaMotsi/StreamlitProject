@@ -18,30 +18,21 @@ def main():
     4. Product Price per Unit
     """)
 
-    
-   
     # Create a dropdown (selectbox)
-    option = st.selectbox(
-        "Select an option", 
-        ["Option 1", "Option 2", "Option 3"]    
-    )
 
-    # Display content based on selected option
-    if option == "Option 1":
-        st.subheader("You selected Option 1")
-        st.write("Here is more content related to Option 1.")
-        # Add more content like images, charts, etc.
-        st.image("https://via.placeholder.com/150", caption="Example Image")
-    elif option == "Option 2":
-        st.subheader("You selected Option 2")
-        st.write("Here is more content related to Option 2.")
-        # Add more content for Option 2
-        st.write("You could display tables, data, etc.")
-    elif option == "Option 3":
-        st.subheader("You selected Option 3")
-        st.write("Here is more content related to Option 3.")
-        # Add more content for Option 3
-        st.write("This could be charts, graphs, or any other data.")
-        
+
+    st.title("🧠 Web Scraping Dashboard")
+
+    with st.expander("Code: Web Scraping Functions"):
+        st.markdown("""
+        This section contains the core scraping logic:
+
+        1. **Get HTML content** from the product page  
+        2. **Extract product name**, price, and price per unit  
+        3. **Handle errors** and missing data  
+        4. **Return structured results** for display and storage
+        """)
+
+            
 if __name__ == "__main__":
     main()
