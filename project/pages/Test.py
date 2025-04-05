@@ -1,7 +1,9 @@
 import streamlit as st
 
 def main():
-    st.title("Dropdown Content Example")
+    st.title("The Process")
+    
+    st.write("This page will explain, in detail, the end to end process for the webscraping, data processing and data analysis of the supermarket data.")
 
     # Create a dropdown (selectbox)
     option = st.selectbox(
