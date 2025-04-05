@@ -10,17 +10,23 @@ def main():
     st.write("The main Python libraries used are Pandas, Selenium and Beautiful Soup")
 
     st.write("""The information web-scraped is the:
-        1. Product Box
-        2. Product Name
-        3. Product Price
-        4. Product Price per Unit
+    1. Product Box
+    2. Product Name
+    3. Product Price
+    4. Product Price per Unit
     """)
     
-
+    articles = {
+    "📰 Article 1: AI in Finance": "Artificial Intelligence (AI) is revolutionizing the financial industry by enabling real-time analytics, fraud detection, and customer personalization.",
+    "🌱 Article 2: Sustainable Agriculture": "Sustainable agriculture focuses on environmentally friendly farming practices that conserve resources and ensure long-term food security.",
+    "🚗 Article 3: Future of Transportation": "Autonomous vehicles and electric mobility are reshaping how we move, reducing emissions and improving safety."
+    }
+    
+    selected_article = st.selectbox("Select an article to read:", list(articles.keys()))
     # Create a dropdown (selectbox)
     option = st.selectbox(
         "Select an option", 
-        ["Option 1", "Option 2", "Option 3"]
+        ["Option 1", "Option 2", "Option 3"]    
     )
 
     # Display content based on selected option
