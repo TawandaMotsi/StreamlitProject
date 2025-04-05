@@ -24,5 +24,6 @@ Navigate the Site:
 * Time Series Forecasting: Use historical data to predict future price movements or view the cheapest day to shop!
 * Weekly Inflation: Track inflation trends on a weekly basis to stay informed.
 * Product Price Comparison: Compare prices across different supermarkets to find the best deals.
+
 """)
 
