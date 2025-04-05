@@ -17,4 +17,4 @@ st.write(
     """,
     unsafe_allow_html=True
 )
-st.image("images/sunrise.avif", caption="Sunrise by the mountains")
+st.image("images/sunrise.png", caption="Sunrise by the mountains")
