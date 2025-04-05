@@ -18,9 +18,9 @@ def main():
     """)
 
     # Functional Dashboard Section
-    st.header("🧠 Web Scraping Dashboard")
+    st.header("Price Comparison")
 
-    with st.expander("Code: Web Scraping Functions"):
+    with st.expander("Code: Price Comparison"):
         st.code("""
 from pymongo import MongoClient
 import streamlit as st
