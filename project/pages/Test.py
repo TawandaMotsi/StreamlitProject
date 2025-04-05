@@ -1,33 +1,4 @@
 import streamlit as st
-from pymongo import MongoClient
-import pandas as pd
-import numpy as np
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
-
-def preprocess_text(text):
-    """Preprocess text by converting to lowercase and removing extra spaces"""
-    if isinstance(text, str):
-        return ' '.join(text.lower().split())
-    return ''
-
-def calculate_similarity(keyword, product_names):
-    """Calculate cosine similarity between the keyword and product names"""
-    try:
-        processed_keyword = preprocess_text(keyword)
-        processed_names = [preprocess_text(name) for name in product_names]
-
-        vectorizer = TfidfVectorizer()
-        tfidf_matrix = vectorizer.fit_transform(processed_names)
-        keyword_vector = vectorizer.transform([processed_keyword])
-
-        similarity_scores = cosine_similarity(keyword_vector, tfidf_matrix).flatten()
-        similarity_scores = similarity_scores * 100
-
-        return similarity_scores
-    except Exception as e:
-        st.error(f"Error calculating similarity: {e}")
-        return np.zeros(len(product_names))
 
 def main():
     # Overview Section
@@ -47,7 +18,7 @@ def main():
     """)
 
     # Functional Dashboard Section
-    st.title("🧠 Web Scraping Dashboard")
+    st.header("🧠 Web Scraping Dashboard")
 
     with st.expander("Code: Web Scraping Functions"):
         st.code("""
@@ -77,7 +48,7 @@ def calculate_similarity(keyword, product_names):
     except Exception as e:
         st.error(f"Error calculating similarity: {e}")
         return np.zeros(len(product_names))
-        """, language="python")
+       , language="python")
 
     st.subheader("Search and Filter Products")
 
@@ -146,7 +117,7 @@ def calculate_similarity(keyword, product_names):
                 else:
                     st.error("The data does not contain the required columns.")
         except Exception as e:
-            st.error(f"Error querying MongoDB: {e}")
+            st.error(f"Error querying MongoDB: {e}""")
 
 if __name__ == "__main__":
     main()
