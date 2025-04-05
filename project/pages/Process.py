@@ -109,7 +109,8 @@ if selected_date:
     except Exception as e:
         st.error(f"Error querying MongoDB: {e}")
         """, language="python")
-
+        
+    st.header("Tfidf Matrix Calculation")
     with st.expander("Code: Tfidf Matrix Calculation Only"):
         st.code("""
 def calculate_similarity(keyword, product_names):
