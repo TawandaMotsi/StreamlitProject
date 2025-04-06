@@ -17,4 +17,6 @@ st.write(
     """,
     unsafe_allow_html=True
 )
-st.image("images/tawa.jpeg", caption="Somewhere on the Globe")
+col1, col2, col3 = st.columns([1, 2, 1])
+with col2:
+    st.image("images/tawa.jpeg", caption="Somewhere on the Globe")
