@@ -115,7 +115,7 @@ if selected_date:
     with st.expander("Code: Tfidf Matrix Calculation Only"):
         st.code("""
 def calculate_similarity(keyword, product_names):
-    """Calculate cosine similarity between the keyword and product names"""
+    \"\"\"Calculate cosine similarity between the keyword and product names\"\"\"
     try:
         # Preprocess the input keyword (e.g., lowercase, remove punctuation, etc.)
         processed_keyword = preprocess_text(keyword)
@@ -141,12 +141,13 @@ def calculate_similarity(keyword, product_names):
 
         # Return the similarity scores for each product name
         return similarity_scores
-
+        
     except Exception as e:
         # If any error occurs, show the error using Streamlit and return zeros for all product names
         st.error(f"Error calculating similarity: {e}")
-        return np.zeros(len(product_names))  # Return a list of zeros with the same length as product_names
-
+        
+        # Return a list of zeros with the same length as product_names
+        return np.zeros(len(product_names))
 """, language="python")
 
 if __name__ == "__main__":
