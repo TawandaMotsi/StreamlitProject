@@ -5,20 +5,10 @@ import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-# Your MongoDB Atlas URI (use the URL-encoded version if special characters are in password)
-uri = "mongodb+srv://Tee:6%3E%21%27%2C%2Bx53%3Bu%2BPit@clustertee.cryy3rk.mongodb.net/?retryWrites=true&w=majority"
-
-# Connect to MongoDB Atlas
-client = MongoClient(uri)
-
-# Access the database and collection
-db = client["ProjectStreamlit"]
-collection = db["p"]
-
 # MongoDB connection setup
-#client = MongoClient("mongodb://localhost:27017/")  # Ensure MongoDB is running locally
-#db = client["ProjectStreamlit"]  # Use your database name
-#collection = db["p"]  # Use your collection name
+client = MongoClient("mongodb://localhost:27017/")  # Ensure MongoDB is running locally
+db = client["ProjectStreamlit"]  # Use your database name
+collection = db["p"]  # Use your collection name
 
 # Streamlit UI
 st.title("Price Comparison Tool")
