@@ -111,7 +111,7 @@ if selected_date:
         st.error(f"Error querying MongoDB: {e}")
         """, language="python")
         
-    st.header("Tfidf Matrix Calculation")
+    st.header("TF-IDF Vectorization (Term Frequency-Inverse Document Frequency) Calculation")
     with st.expander("Code: Tfidf Matrix Calculation Only"):
         st.code("""
 def calculate_similarity(keyword, product_names):
