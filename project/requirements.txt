@@ -6,4 +6,4 @@ TfidfVectorizer
 cosine_similarity
 MongoClient
 plotly.graph_objects
-plotly.subplots
+plotly.subplotsst
