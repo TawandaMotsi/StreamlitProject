@@ -1,0 +1,9 @@
+pymongo
+streamlit
+pandas
+numpy
+TfidfVectorizer
+cosine_similarity
+MongoClient
+plotly.graph_objects
+plotly.subplots
