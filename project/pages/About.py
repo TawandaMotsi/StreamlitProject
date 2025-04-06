@@ -1,4 +1,5 @@
 import streamlit as st
+st.set_page_config(layout="wide")
 
 st.header("About Me")
 
@@ -21,4 +22,4 @@ col1, col2 = st.columns([2, 2])
 with col1:
     st.image("images/tawa.jpeg", caption="Somewhere on the Globe")
 with col2:
-    st.image("images/tawa.jpeg", caption="Somewhere on the Globe")
+    st.image("images/tawa2.jpeg", caption="Somewhere on the Globe")
