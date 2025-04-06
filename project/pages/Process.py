@@ -115,22 +115,38 @@ if selected_date:
     with st.expander("Code: Tfidf Matrix Calculation Only"):
         st.code("""
 def calculate_similarity(keyword, product_names):
-    \"\"\"Calculate cosine similarity between the keyword and product names\"\"\"
+    """Calculate cosine similarity between the keyword and product names"""
     try:
+        # Preprocess the input keyword (e.g., lowercase, remove punctuation, etc.)
         processed_keyword = preprocess_text(keyword)
+
+        # Preprocess each product name in the list
         processed_names = [preprocess_text(name) for name in product_names]
 
+        # Create a TF-IDF Vectorizer instance
+        # This will convert the text into numerical feature vectors
         vectorizer = TfidfVectorizer()
+
+        # Fit the vectorizer on the product names and transform them into TF-IDF vectors
         tfidf_matrix = vectorizer.fit_transform(processed_names)
+
+        # Transform the processed keyword into a TF-IDF vector using the same vocabulary
         keyword_vector = vectorizer.transform([processed_keyword])
 
+        # Compute the cosine similarity between the keyword vector and each product name vector
         similarity_scores = cosine_similarity(keyword_vector, tfidf_matrix).flatten()
+
+        # Convert the similarity scores to percentages (0–100%)
         similarity_scores = similarity_scores * 100
 
+        # Return the similarity scores for each product name
         return similarity_scores
+
     except Exception as e:
+        # If any error occurs, show the error using Streamlit and return zeros for all product names
         st.error(f"Error calculating similarity: {e}")
-        return np.zeros(len(product_names))
+        return np.zeros(len(product_names))  # Return a list of zeros with the same length as product_names
+
 """, language="python")
 
 if __name__ == "__main__":
